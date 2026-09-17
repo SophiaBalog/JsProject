@@ -1,0 +1,24 @@
+{
+  "name": "shop-api",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/SophiaBalog/JsProject#readme",
+  "bugs": {
+    "url": "https://github.com/SophiaBalog/JsProject/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SophiaBalog/JsProject.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
