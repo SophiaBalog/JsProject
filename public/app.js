@@ -39,10 +39,7 @@ addBtn.addEventListener('click', async (e) => {
         return;
     }
 
-    const product = await res.json();
-
-    products.push(product);
-
+    products = await loadProducts();
     render(products);
 
     titleValue.value = '';
