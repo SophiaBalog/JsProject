@@ -10,40 +10,41 @@ async function loadProducts() {
 
 let products = [];
 
-const addBtn = document.querySelector('#add-btn');
-const titleValue = document.querySelector('#title');
-const priceValue = document.querySelector('#price');
+const form = document.querySelector('#form');
 const list = document.querySelector('#list');
 const errorBox = document.querySelector('#error');
 
-addBtn.addEventListener('click', async (e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const title = titleValue.value;
-    const price =Number( priceValue.value);
+    const formData = new FormData(form);
+    const title = formData.get('title');
+    const price = Number(formData.get('price'));
 
-    const res = await fetch('/api/products', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            title,
-            price
-        })
-    });
-    
-    if (!res.ok) {
-        const error = await res.json();
-        errorBox.textContent = error.error;
-        return;
+    try{
+        const res = await fetch('/api/products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title,
+                price
+            })
+        });
+        
+        if (!res.ok) {
+            const error = await res.json();
+            errorBox.textContent = error.error;
+            return;
+        }
+
+        form.reset();
+        await refresh();
+    } catch (error) {
+        errorBox.textContent = `ERROR: ${error.message}`;
     }
 
-    products = await loadProducts();
-    render(products);
-
-    titleValue.value = '';
-    priceValue.value = '';
 });
 
 function render(products) {

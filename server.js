@@ -64,7 +64,7 @@ app.post("/api/products",(req,res)=>{
     const {title,price} = req.body;
 
     if (!title || !price){
-        return res.sendStatus(400).json({error:"Data is not complete"})
+        return res.status(400).json({ error: "Data is not complete" });
     };
 
     const product = {id: nextId, title,price}
